@@ -1,1 +1,24 @@
-<p>fuels works!</p>
+<h2>Lista paliw:</h2>
+<ul>
+    <li *ngFor="let fuel of fuels">
+        {{fuel.name}} - {{fuel.price}} - {{fuel.category}} - {{fuel.available ? "Yes" : "No"}} - {{fuel.stockLevel}} - {{fuel.premium ? "Yes" : "No"}}
+    </li>
+</ul>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Availability</th>
+        <th>Stock level</th>
+        <th>Premium</th>
+    </tr>
+    <tr *ngFor="let fuel of fuels" [ngClass]="fuel.available ? 'isAvailable' : 'isNotAvailable'">
+        <td>{{fuel.name}}</td>
+        <td>{{fuel.price}}</td>
+        <td>{{fuel.category}}</td>
+        <td>{{fuel.available ? "Yes" : "No"}}</td>
+        <td>{{fuel.stockLevel}}</td>
+        <td>{{fuel.premium ? "Yes" : "No"}}</td>
+    </tr>
+</table>

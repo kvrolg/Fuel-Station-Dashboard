@@ -2,7 +2,7 @@ export interface FuelModel{
     id: number;
     name: string;
     price: number;
-    avalible: boolean;
+    available: boolean;
     category: string;
     description: string;
     ocatne: number;
