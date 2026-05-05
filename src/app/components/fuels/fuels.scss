@@ -16,9 +16,13 @@ table{
 }
 
 .isNotAvailable{
-    background-color: rgb(255, 129, 129);
+    background-color: #fddad6;
 }
 
 .isAvailable{
-    background-color: rgb(175, 255, 175);
+    background-color: rgb(210, 252, 210);
+}
+
+tr:nth-child(even){
+    background-color: rgb(238, 238, 238);
 }

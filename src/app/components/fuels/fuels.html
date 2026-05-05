@@ -1,6 +1,8 @@
-<h2>Lista paliw:</h2>
+@let data = fuels2 | async;
+
+<h2>Fuels list:</h2>
 <ul>
-    <li *ngFor="let fuel of fuels">
+    <li *ngFor="let fuel of data">
         {{fuel.name}} - {{fuel.price}} - {{fuel.category}} - {{fuel.available ? "Yes" : "No"}} - {{fuel.stockLevel}} - {{fuel.premium ? "Yes" : "No"}}
     </li>
 </ul>
@@ -13,12 +15,12 @@
         <th>Stock level</th>
         <th>Premium</th>
     </tr>
-    <tr *ngFor="let fuel of fuels" [ngClass]="fuel.available ? 'isAvailable' : 'isNotAvailable'">
+    <tr *ngFor="let fuel of data">
         <td>{{fuel.name}}</td>
         <td>{{fuel.price}}</td>
         <td>{{fuel.category}}</td>
-        <td>{{fuel.available ? "Yes" : "No"}}</td>
-        <td>{{fuel.stockLevel}}</td>
-        <td>{{fuel.premium ? "Yes" : "No"}}</td>
+        <td [ngClass]="fuel.available ? 'isAvailable' : 'isNotAvailable'">{{fuel.available ? "Yes" : "No"}}</td>
+        <td [ngClass]="fuel.stockLevel ? 'isAvailable' : 'isNotAvailable'">{{fuel.stockLevel}}</td>
+        <td [ngClass]="fuel.premium ? 'isAvailable' : 'isNotAvailable'">{{fuel.premium ? "Yes" : "No"}}</td>
     </tr>
 </table>
