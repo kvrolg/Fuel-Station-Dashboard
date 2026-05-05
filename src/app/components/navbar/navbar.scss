@@ -1,0 +1,38 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+a{
+    position: relative;
+    padding-left: 0px;
+    color: white;
+    text-decoration: none;
+    font-size: x-large;
+    padding: 15px;
+    margin-left: 10px;
+}
+
+nav{
+    padding: 0;
+    position: fixed;
+    width: 100%;
+    height: 60px;
+    background-color: blue;
+    display: flex;
+    z-index: 10;
+}
+
+router-outlet{
+    position: relative;
+    box-sizing: border-box;
+    padding: 30px;
+    display: flex;
+}
+
+.active{
+    font-weight: bold;
+   color: orange; 
+   font-size: 1.7em;
+   padding: 12px;
+}
