@@ -1,11 +1,6 @@
 @let data = fuels2 | async;
 
 <h2>Fuels list:</h2>
-<ul>
-    <li *ngFor="let fuel of data">
-        {{fuel.name}} - {{fuel.price}} - {{fuel.category}} - {{fuel.available ? "Yes" : "No"}} - {{fuel.stockLevel}} - {{fuel.premium ? "Yes" : "No"}}
-    </li>
-</ul>
 <table>
     <tr>
         <th>Name</th>
