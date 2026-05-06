@@ -1,42 +1,20 @@
-import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
+import { Component, inject} from '@angular/core';
 import { FuelService } from '../../fuel-service';
 import { FuelModel } from '../../models/fuel.model';
-import { NgForOf, NgClass, AsyncPipe, DatePipe } from "@angular/common";
-import { Observable, throwError } from 'rxjs';
+import { NgForOf, NgClass, AsyncPipe } from "@angular/common";
+import { Observable } from 'rxjs';
+import {MatTableModule} from '@angular/material/table';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @Component({
   selector: 'app-fuels',
-  imports: [NgForOf, NgClass, AsyncPipe, DatePipe],
+  imports: [NgForOf, NgClass, AsyncPipe, MatTableModule, MatButtonModule],
   templateUrl: './fuels.html',
   styleUrl: './fuels.scss',
 })
-export class Fuels implements OnInit, AfterViewInit{
-  date = new Date();
-
-  ngAfterViewInit(): void {
-    console.log('After init', this.fuels)
-  }
+export class Fuels{
   private fuelsList = inject(FuelService);
-  fuels: FuelModel[] = [];
-  fuels2: Observable<FuelModel[]> = this.fuelsList.getFuels();
-  
-  observer = {
-    next: (value: FuelModel[]) => {
-      this.fuels = value;
-      console.log(value);
-    },
-    error: (err: any) => {
-      console.log("%c It is error ","color: red; font-size: 20px;", err);
-    },
-    complete: () => {
-      console.log("Completed");
-    }
-  }
-
-  ngOnInit(){
-    // this.fuels2.subscribe(this.observer);
-    console.log('On init', this.fuels)
-    // this.fuelsList.getFuels().pipe().subscribe(value => console.log(value));
-  }
+  fuels$: Observable<FuelModel[]> = this.fuelsList.getFuels();
+  keys: string[] = ['name', 'price', 'category', 'available', 'stockLevel', 'premium'];
 }

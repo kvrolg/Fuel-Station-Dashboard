@@ -1,21 +1,36 @@
-@let data = fuels2 | async;
+@let data = fuels$ | async;
+@if(data?.length && data!==null){
+  
+<table mat-table [dataSource]="data" class="mat-elevation-z8">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef> Price</th>
+    <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+  </ng-container>
+  <ng-container matColumnDef="category">
+    <th mat-header-cell *matHeaderCellDef> Category</th>
+    <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+  </ng-container>
+  <ng-container matColumnDef="available">
+    <th mat-header-cell *matHeaderCellDef> Availability</th>
+    <td mat-cell *matCellDef="let element"> {{element.available ? 'Yes' : 'No'}} </td>
+  </ng-container>
+  <ng-container matColumnDef="stockLevel">
+    <th mat-header-cell *matHeaderCellDef> Stock level</th>
+    <td mat-cell *matCellDef="let element"> {{element.stockLevel ? element.stockLevel : '-'}} </td>
+  </ng-container>
+  <ng-container matColumnDef="premium">
+    <th mat-header-cell *matHeaderCellDef> Premium </th>
+    <td mat-cell *matCellDef="let element"> {{element.premium ? 'Yes' : 'No'}} </td>
+  </ng-container>
 
-<h2>Fuels list:</h2>
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Category</th>
-        <th>Availability</th>
-        <th>Stock level</th>
-        <th>Premium</th>
-    </tr>
-    <tr *ngFor="let fuel of data">
-        <td>{{fuel.name}}</td>
-        <td>{{fuel.price}}</td>
-        <td>{{fuel.category}}</td>
-        <td [ngClass]="fuel.available ? 'isAvailable' : 'isNotAvailable'">{{fuel.available ? "Yes" : "No"}}</td>
-        <td [ngClass]="fuel.stockLevel ? 'isAvailable' : 'isNotAvailable'">{{fuel.stockLevel}}</td>
-        <td [ngClass]="fuel.premium ? 'isAvailable' : 'isNotAvailable'">{{fuel.premium ? "Yes" : "No"}}</td>
-    </tr>
+  <tr mat-header-row *matHeaderRowDef="keys"></tr>
+  <tr mat-row *matRowDef="let row; columns: keys;"></tr>
+  
 </table>
+} @else {
+  <h3>no data</h3>
+}
