@@ -1,48 +1,54 @@
-@let data = fuels$ | async;
-@if(data?.length && data!==null){
-  
-<mat-form-field>
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Insert a name" #input>
-</mat-form-field>
-  
-<table mat-table [dataSource]="data" class="mat-elevation-z8">
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-  </ng-container>
-  <ng-container matColumnDef="price">
-    <th mat-header-cell *matHeaderCellDef> Price</th>
-    <td mat-cell *matCellDef="let element"> {{element.price}} </td>
-  </ng-container>
-  <ng-container matColumnDef="category">
-    <th mat-header-cell *matHeaderCellDef> Category</th>
-    <td mat-cell *matCellDef="let element"> {{element.category}} </td>
-  </ng-container>
-  <ng-container matColumnDef="available">
-    <th mat-header-cell *matHeaderCellDef> Availability</th>
-    <td mat-cell *matCellDef="let element"> {{element.available ? 'Yes' : 'No'}} </td>
-  </ng-container>
-  <ng-container matColumnDef="stockLevel">
-    <th mat-header-cell *matHeaderCellDef> Stock level</th>
-    <td mat-cell *matCellDef="let element"> {{element.stockLevel ? element.stockLevel : '-'}} </td>
-  </ng-container>
-  <ng-container matColumnDef="premium">
-    <th mat-header-cell *matHeaderCellDef> Premium </th>
-    <td mat-cell *matCellDef="let element"> {{element.premium ? 'Yes' : 'No'}} </td>
-  </ng-container>
+@let data = dataSource;
+@if (data !== null) {
+  <!-- @let newData = dataSource; -->
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Insert a name" #input />
+  </mat-form-field>
 
-  <tr mat-header-row *matHeaderRowDef="keys"></tr>
-  <tr mat-row *matRowDef="let row; columns: keys;"></tr>
+  <table mat-table [dataSource]="data" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>Price</th>
+      <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+    </ng-container>
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef>Category</th>
+      <td mat-cell *matCellDef="let element">{{ element.category }}</td>
+    </ng-container>
+    <ng-container matColumnDef="available">
+      <th mat-header-cell *matHeaderCellDef>Availability</th>
+      <td mat-cell *matCellDef="let element" [class.active]="element.available">
+        {{ element.available ? 'Yes' : 'No' }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="stockLevel">
+      <th mat-header-cell *matHeaderCellDef>Stock level</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.stockLevel ? element.stockLevel : '-' }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="premium">
+      <th mat-header-cell *matHeaderCellDef>Premium</th>
+      <td mat-cell *matCellDef="let element">{{ element.premium ? 'Yes' : 'No' }}</td>
+    </ng-container>
 
-  <tr class="mat-row" *matNoDataRow>
-    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-  </tr>
-  
-</table>
-} @else {
-  <h3>no data</h3>
+    <tr mat-header-row *matHeaderRowDef="keys"></tr>
+    <tr mat-row *matRowDef="let row; columns: keys"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="6">No data matching the filter "{{ input.value }}"</td>
+    </tr>
+  </table>
 }
-
+<!-- 
+@else if (!data) {
+  <h3 style="padding: 10px">no data</h3>
+} @else {
+  <mat-spinner></mat-spinner>
+} -->
 
 <button matButton="filled">Basic</button>

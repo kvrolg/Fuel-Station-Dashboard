@@ -27,3 +27,8 @@ tr:nth-child(even){
 ::ng-deep #mat-elevation-z8{
   border-bottom: 2px solid black;
 }
+
+::ng-deep #active{
+  background-color: navy;
+  color: white;
+}
