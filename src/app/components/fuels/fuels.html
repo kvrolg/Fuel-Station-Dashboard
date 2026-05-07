@@ -1,6 +1,11 @@
 @let data = fuels$ | async;
 @if(data?.length && data!==null){
   
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Insert a name" #input>
+</mat-form-field>
+  
 <table mat-table [dataSource]="data" class="mat-elevation-z8">
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> Name </th>
@@ -29,8 +34,15 @@
 
   <tr mat-header-row *matHeaderRowDef="keys"></tr>
   <tr mat-row *matRowDef="let row; columns: keys;"></tr>
+
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+  </tr>
   
 </table>
 } @else {
   <h3>no data</h3>
 }
+
+
+<button matButton="filled">Basic</button>
