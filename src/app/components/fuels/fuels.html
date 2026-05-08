@@ -1,10 +1,16 @@
-@let data = dataSource;
-@if (data !== null) {
-  <!-- @let newData = dataSource; -->
-  <mat-form-field>
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Insert a name" #input />
-  </mat-form-field>
+@if (fuels$ | async) {
+  @let data = dataSource;
+
+  <div class="filtering">
+    <mat-form-field class="matField">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Insert a name" #input />
+    </mat-form-field>
+
+    <h3>Filter by:</h3>
+    <mat-slide-toggle [(ngModel)]="isAvailable" (change)="onToggleChange()">Availability</mat-slide-toggle>
+    <mat-slide-toggle [(ngModel)]="isPremium" (change)="onToggleChange()">Premium</mat-slide-toggle>
+  </div>
 
   <table mat-table [dataSource]="data" class="mat-elevation-z8">
     <ng-container matColumnDef="name">
@@ -50,5 +56,3 @@
 } @else {
   <mat-spinner></mat-spinner>
 } -->
-
-<button matButton="filled">Basic</button>

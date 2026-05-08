@@ -32,3 +32,19 @@ tr:nth-child(even){
   background-color: navy;
   color: white;
 }
+
+.filtering{
+  position: relative;
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.filtering > *{
+  position: relative;
+  margin: 5px 15px 0 15px;
+}
+
+::ng-deep .matField{
+  margin: 20px 0 0 15px !important;
+}
