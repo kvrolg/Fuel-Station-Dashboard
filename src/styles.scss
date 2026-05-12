@@ -10,7 +10,8 @@ html {
   @include mat.theme(
     (
       color: (
-        primary: mat.$blue-palette,
+        primary: mat.$azure-palette,
+        on-primary: mat.$azure-palette,
         secondary: mat.$blue-palette,
         tertiary: mat.$blue-palette,
       ),
