@@ -1,12 +1,12 @@
 @if (fuels$ | async) {
   @let data = dataSource;
-
+  
   <div class="filtering">
     <mat-form-field class="mat-field">
       <mat-label>Search by name</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Insert a name" #input />
     </mat-form-field>
-
+    
     <h3>Check if fuel is:</h3>
     <mat-slide-toggle (change)="onToggleChange('available', $event)">available</mat-slide-toggle>
     <mat-slide-toggle (change)="onToggleChange('premium', $event)">premium</mat-slide-toggle>
@@ -49,4 +49,5 @@
       <td class="mat-cell" colspan="6">No data matching the filter "{{ input.value }}"</td>
     </tr>
   </table>
+
 }
