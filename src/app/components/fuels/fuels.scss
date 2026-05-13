@@ -13,6 +13,8 @@ tr:nth-child(even) {
   @include mat.button-overrides(
     (
       filled-container-color: var(--primary-color),
+      filled-container-shape: 5px,
+      filled-container-height: 50px
     )
   );
   ::ng-deep .mat-mdc-table th {

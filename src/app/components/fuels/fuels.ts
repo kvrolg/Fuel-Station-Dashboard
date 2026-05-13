@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject, ViewChild } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { FuelService } from '../../fuel-service';
 import { FuelModel } from '../../models/fuel.model';
 import { AsyncPipe } from '@angular/common';
@@ -14,6 +14,8 @@ import {
 } from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
+import { ChangePriceComponent } from './change-price-component/change-price-component';
+import { MatDialog } from '@angular/material/dialog';
 
 interface FilterState {
   name: string;
@@ -37,6 +39,23 @@ interface FilterState {
   styleUrl: './fuels.scss',
 })
 export class Fuels {
+  private dialog = inject(MatDialog);
+  protected openModal() {
+    const openedDialog = this.dialog.open(ChangePriceComponent, { disableClose: true });
+    openedDialog.afterClosed().subscribe((row: FuelModel) => {
+      this.updateFuelRow(row);
+    });
+  }
+
+  updateFuelRow(updatedRow: FuelModel): void {
+    const updatedTable = this.dataSource.data;
+    const currentIndex = updatedTable.findIndex((tableRow) => tableRow.id === updatedRow.id);
+    if (currentIndex !== -1) {
+      updatedTable[currentIndex] = updatedRow;
+      this.dataSource.data = [...updatedTable];
+    }
+  }
+
   @ViewChild(MatSort) set sort(value: MatSort) {
     this.dataSource.sort = value;
   }
@@ -67,7 +86,6 @@ export class Fuels {
 
   keys: string[] = ['name', 'price', 'category', 'available', 'stockLevel', 'premium'];
   dataSource = new MatTableDataSource<FuelModel>();
-
   applyFilter(event: Event): void {
     this.filterState.name = (event.target as HTMLInputElement).value.trim().toLowerCase();
     this.dataSource.filter = this.filterState.name;
@@ -81,7 +99,5 @@ export class Fuels {
       this.filterState.premium = event.checked;
       (this.dataSource.filter as any) = this.filterState.premium;
     }
-
-    console.log(this.filterState);
   }
 }
