@@ -29,7 +29,7 @@
     <ng-container matColumnDef="available">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Available</th>
       <td mat-cell *matCellDef="let element">
-        {{ element.available ? 'Yes' : 'No' }}
+        <mat-slide-toggle (change)="onToggleChangeAvailability(element.id, $event)" [checked]="element.available">{{ element.available ? 'Yes' : 'No' }}</mat-slide-toggle>
       </td>
     </ng-container>
     <ng-container matColumnDef="stockLevel">

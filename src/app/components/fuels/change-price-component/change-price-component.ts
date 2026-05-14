@@ -1,15 +1,13 @@
-import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FuelService } from '../../../fuel-service';
-import { Observable, tap } from 'rxjs';
-import { FuelModel } from '../../../models/fuel.model';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatSelectModule, MatFormField, MatSelect, MatOption } from '@angular/material/select';
+import { MatFormField, MatSelect, MatOption } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
-import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { Router } from '@angular/router';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import {MatDialogModule} from '@angular/material/dialog';
+
 
 
 @Component({
@@ -22,8 +20,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatOption,
     MatButtonModule,
     MatFormFieldModule,
-    MatDialogModule
-  ],
+    MatDialogModule,
+],
   templateUrl: './change-price-component.html',
   styleUrl: './change-price-component.scss',
 })
@@ -60,4 +58,5 @@ export class ChangePriceComponent {
       alert('Choose a fuel and set a price');
     }
   }
+
 }
