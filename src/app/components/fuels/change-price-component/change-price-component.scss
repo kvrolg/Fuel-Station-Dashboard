@@ -5,7 +5,7 @@
   background-color: white;
   border-radius: 0.4em;
   padding: 0 50px 0 50px;
-  height: 360px;
+  height: 400px;
   width: auto;
 }
 article {
@@ -18,9 +18,11 @@ form {
 }
 form button {
   display: block;
+  margin-top: 20px
 }
+
 h1 {
-  margin: 25px 0 30px 0;
+  margin: 30px 0 15px 0;
 }
 
 input[type='number']::-webkit-inner-spin-button,

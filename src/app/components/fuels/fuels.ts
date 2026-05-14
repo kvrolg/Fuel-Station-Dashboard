@@ -100,4 +100,11 @@ export class Fuels {
       (this.dataSource.filter as any) = this.filterState.premium;
     }
   }
+
+    onToggleChangeAvailability(id: string, event: MatSlideToggleChange){
+    this.fuelsList.updateFuelAvailability(+id, event.checked).subscribe((updatedFuel: FuelModel) => {
+      this.updateFuelRow(updatedFuel);
+    });
+  }
+
 }

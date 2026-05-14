@@ -35,7 +35,7 @@
     {
       "id": "2",
       "name": "PB98",
-      "price": 56,
+      "price": 12,
       "available": true,
       "category": "petrol",
       "description": "Benzyna premium dla bardziej wymagających silników.",
@@ -68,8 +68,8 @@
     {
       "id": "4",
       "name": "ON Premium",
-      "price": 7,
-      "available": false,
+      "price": 12,
+      "available": true,
       "category": "diesel",
       "description": "Premium diesel z dodatkami czyszczącymi silnik.",
       "brand": "Ultra Diesel",
