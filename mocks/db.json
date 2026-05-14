@@ -18,7 +18,7 @@
     {
       "id": "1",
       "name": "PB95",
-      "price": 7.03,
+      "price": 1,
       "available": true,
       "category": "petrol",
       "description": "New description",
@@ -35,7 +35,7 @@
     {
       "id": "2",
       "name": "PB98",
-      "price": 13,
+      "price": 56,
       "available": true,
       "category": "petrol",
       "description": "Benzyna premium dla bardziej wymagających silników.",
@@ -52,7 +52,7 @@
     {
       "id": "3",
       "name": "ON",
-      "price": 6.79,
+      "price": 12,
       "available": true,
       "category": "diesel",
       "description": "Olej napędowy dla samochodów z silnikiem diesla.",

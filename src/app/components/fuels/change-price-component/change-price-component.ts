@@ -33,7 +33,7 @@ export class ChangePriceComponent {
   arrayOfIndex = [0,1,2,3,4];
 
   fuelsTable: Array<string> = ['PB95', 'PB98', 'ON', 'ON Premium', 'LPG'];
-  protected closeModal() {
+  protected closeModal(): void {
     this.dialogRef?.close();
   }
 

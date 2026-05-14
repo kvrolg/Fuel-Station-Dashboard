@@ -1,13 +1,12 @@
 @use '@angular/material' as mat;
 
-:host-context(cdk-mat-dialog-container) {
+:host{
   display: flex;
   background-color: white;
   border-radius: 0.4em;
-  padding: 0 2em 2em;
-  box-shadow: 0 0 2em black;
-  height: 320px;
-  width: 200px;
+  padding: 0 50px 0 50px;
+  height: 360px;
+  width: auto;
 }
 article {
   align-items: center;
@@ -27,11 +26,4 @@ h1 {
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
-}
-:root {
-  @include mat.dialog-overrides((
-    container-color: orange,
-    subhead-color: red,
-    
-  ));
 }
