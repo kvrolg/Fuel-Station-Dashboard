@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { FuelModel } from './models/fuel.model';
 import { HttpClient } from '@angular/common/http';
-import { firstValueFrom, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,5 +12,9 @@ export class FuelService {
 
  getFuels(): Observable<FuelModel[]>{
     return this.http.get<FuelModel[]>(this.url)
+  }
+  
+  updateFuelPrice(id: number, priceValue: number ): Observable<FuelModel>{
+    return this.http.patch<FuelModel>(`${this.url}/${id}`, {price: priceValue})
   }
 }
