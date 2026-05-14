@@ -18,7 +18,7 @@ export class FuelService {
     return this.http.patch<FuelModel>(`${this.url}/${id}`, {price: priceValue})
   }
 
-  updateFuelAvailability(id: number, available: boolean){
+  updateFuelAvailability(id: number, available: boolean): Observable<FuelModel>{
     return this.http.patch<FuelModel>(`${this.url}/${id}`, {available})
   }
 }
