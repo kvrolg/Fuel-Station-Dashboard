@@ -14,7 +14,9 @@ tr:nth-child(even) {
     (
       filled-container-color: var(--primary-color),
       filled-container-shape: 5px,
-      filled-container-height: 50px
+      filled-container-height: 50px,
+      filled-label-text-weight: 550,
+      filled-label-text-size: 16px
     )
   );
   ::ng-deep .mat-mdc-table th {

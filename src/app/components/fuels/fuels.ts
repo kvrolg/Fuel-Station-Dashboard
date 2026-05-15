@@ -40,7 +40,7 @@ interface FilterState {
 })
 export class Fuels {
   private dialog = inject(MatDialog);
-  protected openModal() {
+  protected openModal(): void {
     const openedDialog = this.dialog.open(ChangePriceComponent, { disableClose: true });
     openedDialog.afterClosed().subscribe((row: FuelModel) => {
       this.updateFuelRow(row);

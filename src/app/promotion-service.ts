@@ -22,7 +22,7 @@ export class PromotionService {
   updatePromotion(id: number, promotion: Promotion): Observable<Promotion>{
     return this.http.patch<Promotion>(`${this.url}/${id}`, promotion)
   }
-  updateWholePromotion(id: number, promotion: Promotion): Observable<Promotion>{
+  replacePromotion(id: number, promotion: Promotion): Observable<Promotion>{
     return this.http.put<Promotion>(`${this.url}/${id}`, promotion);
   }
   deletePromotion(id: number): Observable<void>{

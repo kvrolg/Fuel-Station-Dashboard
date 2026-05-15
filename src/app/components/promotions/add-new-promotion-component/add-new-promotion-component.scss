@@ -1,0 +1,12 @@
+article{
+    display: grid;
+    gap: 10px;
+    padding: 20px;
+}
+form{
+    display: grid;
+    grid-template-columns: auto;
+}
+.buttons{
+    display: block;
+}
