@@ -73,7 +73,7 @@ export class AddNewPromotionComponent {
 
   submitApplication(): void {
     const path = this.applyForm.getRawValue();
-    if (path && !this.applyForm.valid) {
+    if (!path === undefined && !this.applyForm.valid) {
       return;
     }
     const newPromotion: Promotion = {

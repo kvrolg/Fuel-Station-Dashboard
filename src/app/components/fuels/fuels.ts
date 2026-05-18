@@ -91,7 +91,7 @@ export class Fuels {
     this.dataSource.filter = this.filterState.name;
   }
 
-  onToggleChange(filterName: string, event: MatSlideToggleChange): void {
+  toggleChange(filterName: string, event: MatSlideToggleChange): void {
     if (filterName === 'available') {
       this.filterState.available = event.checked;
       (this.dataSource.filter as any) = this.filterState.available;
@@ -101,7 +101,7 @@ export class Fuels {
     }
   }
 
-  onToggleChangeAvailability(id: string, event: MatSlideToggleChange): void {
+  toggleChangeAvailability(id: string, event: MatSlideToggleChange): void {
     this.fuelsList
       .updateFuelAvailability(+id, event.checked)
       .subscribe((updatedFuel: FuelModel) => {
