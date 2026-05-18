@@ -1,3 +1,5 @@
+@use '@angular/material' as mat;
+
 article{
     display: grid;
     gap: 10px;
@@ -9,4 +11,11 @@ form{
 }
 .buttons{
     display: block;
+    margin-top: 15px;
+}
+form > *{
+    margin-left: 10px;
+}
+h1{
+    margin-left: 5px;
 }

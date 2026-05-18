@@ -7,14 +7,13 @@ import {
   Validators
 } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
-import { MatDateRangeInput, MatDateRangePicker } from '@angular/material/datepicker';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatDatepickerModule, MatDateRangeInput, MatDateRangePicker } from '@angular/material/datepicker';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule} from '@angular/material/input';
-import { MatOption, MatSelect, MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatDatepickerModule } from '@angular/material/datepicker'; 
-import { provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-add-new-promotion-component',
@@ -26,7 +25,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
     MatSelectModule,
     ReactiveFormsModule,
     MatSlideToggleModule,
-    // MatDateRangeInput,
+    MatDateRangeInput,
     FormsModule,
     MatDateRangePicker,
     MatDateRangeInput,
