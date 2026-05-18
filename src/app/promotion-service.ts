@@ -8,24 +8,24 @@ import { Promotion } from './models/promotion.model';
 })
 export class PromotionService {
   private http = inject(HttpClient);
-  url: string = "http://localhost:3000/promotions";
+  url: string = 'http://localhost:3000/promotions';
 
-  getPromotions(): Observable<Promotion[]>{
+  getPromotions(): Observable<Promotion[]> {
     return this.http.get<Promotion[]>(this.url);
   }
-  getPromotionById(id: number): Observable<Promotion>{
+  getPromotionById(id: number): Observable<Promotion> {
     return this.http.get<Promotion>(`${this.url}/${id}`);
   }
-  createPromotion(promotion: Promotion): Observable<Promotion>{
-    return this.http.post<Promotion>(this.url, promotion)
+  createPromotion(promotion: Promotion): Observable<Promotion> {
+    return this.http.post<Promotion>(this.url, promotion);
   }
-  updatePromotion(id: number, promotion: Promotion): Observable<Promotion>{
-    return this.http.patch<Promotion>(`${this.url}/${id}`, promotion)
+  updatePromotion(id: number, promotion: Promotion): Observable<Promotion> {
+    return this.http.patch<Promotion>(`${this.url}/${id}`, promotion);
   }
-  replacePromotion(id: number, promotion: Promotion): Observable<Promotion>{
+  replacePromotion(id: number, promotion: Promotion): Observable<Promotion> {
     return this.http.put<Promotion>(`${this.url}/${id}`, promotion);
   }
-  deletePromotion(id: number): Observable<void>{
+  deletePromotion(id: number): Observable<void> {
     return this.http.delete<void>(`${this.url}/${id}`);
   }
 }

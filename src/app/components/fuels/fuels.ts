@@ -101,10 +101,11 @@ export class Fuels {
     }
   }
 
-    onToggleChangeAvailability(id: string, event: MatSlideToggleChange): void{
-    this.fuelsList.updateFuelAvailability(+id, event.checked).subscribe((updatedFuel: FuelModel) => {
-      this.updateFuelRow(updatedFuel);
-    });
+  onToggleChangeAvailability(id: string, event: MatSlideToggleChange): void {
+    this.fuelsList
+      .updateFuelAvailability(+id, event.checked)
+      .subscribe((updatedFuel: FuelModel) => {
+        this.updateFuelRow(updatedFuel);
+      });
   }
-
 }

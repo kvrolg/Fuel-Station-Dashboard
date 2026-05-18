@@ -9,5 +9,5 @@ export interface Promotion{
     badge: string;
     pointsReward: number;
     minPurchaseAmount: number;
-    fuelId: number;
+    fuelId?: number;
 }
