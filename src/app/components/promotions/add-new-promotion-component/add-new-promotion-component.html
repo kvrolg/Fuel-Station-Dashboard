@@ -19,6 +19,7 @@
         <mat-option value="fuel">fuel</mat-option>
         <mat-option value="coffee">coffee</mat-option>
         <mat-option value="carwash">carwash</mat-option>
+        <mat-error>Choose a type</mat-error>
       </mat-select>
     </mat-form-field>
     <!-- ACTIVE -->
@@ -35,6 +36,7 @@
       <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="datePicker"></mat-datepicker-toggle>
       <mat-date-range-picker #datePicker></mat-date-range-picker>
+      <mat-error>Choose correct date</mat-error>
     </mat-form-field>
     <!-- BADGE -->
     <mat-form-field>
@@ -44,19 +46,22 @@
         <mat-option value="bonus">BONUS</mat-option>
         <mat-option value="weekend">WEEKEND</mat-option>
       </mat-select>
+      <mat-error>Choose a badge</mat-error>
     </mat-form-field>
     <!-- POINTS -->
     <mat-form-field>
       <mat-label>Points reward</mat-label>
       <input type="number" formControlName="pointsReward" matInput />
+      <mat-error>Points can not be 0 or less</mat-error>
     </mat-form-field>
     <!-- MIN PURCHASE AMOUNT -->
     <mat-form-field>
       <mat-label>Min purchase amount</mat-label>
       <input type="number" formControlName="minPurchaseAmount" matInput />
+      <mat-error>Amount can not be 0 or less</mat-error>
     </mat-form-field>
     <div class="buttons">
-        <button type="submit" matButton="filled" [disabled]="!applyForm.valid">Apply changes</button>
+      <button type="submit" matButton="filled" [disabled]="!applyForm.valid">Apply changes</button>
         <button (click)="closeModal()" matButton>Close</button>
     </div>
   </form>
