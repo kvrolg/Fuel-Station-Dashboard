@@ -1,2 +1,41 @@
-<p>promotions works!</p>
-<button (click)="onClick()">Click me</button>
+@if (promotions$ | async) {
+  <div class="edit">
+    <button matButton="filled" (click)="openModal()">+ Add new</button>
+  </div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef>Title</th>
+      <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="flag">
+      <th mat-header-cell *matHeaderCellDef>Is Active</th>
+      <td mat-cell *matCellDef="let element">{{ element.active ? 'Yes' : 'No' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="range">
+      <th mat-header-cell *matHeaderCellDef>Range</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.startDate | date: 'dd MMM' }} - {{ element.endDate | date: 'dd MMM' }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="badge">
+      <th mat-header-cell *matHeaderCellDef>Badge</th>
+      <td mat-cell *matCellDef="let element">{{ element.badge }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="pointsReward">
+      <th mat-header-cell *matHeaderCellDef>Points</th>
+      <td mat-cell *matCellDef="let element">{{ element.pointsReward }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="keys"></tr>
+    <tr mat-row *matRowDef="let row; columns: keys"></tr>
+  </table>
+}

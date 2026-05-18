@@ -1,0 +1,68 @@
+<article>
+  <h1>Add new</h1>
+  <form [formGroup]="applyForm" (ngSubmit)="submitApplication()">
+    <!-- TITLE -->
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input type="text" formControlName="title" matInput />
+      <mat-error>Provide a title</mat-error>
+    </mat-form-field>
+    <!-- DESCRIPTION -->
+    <mat-form-field class="example-full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+    <!-- TYPE -->
+    <mat-form-field>
+      <mat-label>Type</mat-label>
+      <mat-select formControlName="type">
+        <mat-option value="fuel">fuel</mat-option>
+        <mat-option value="coffee">coffee</mat-option>
+        <mat-option value="carwash">carwash</mat-option>
+      </mat-select>
+      <mat-error>Choose a type</mat-error>
+    </mat-form-field>
+    <!-- BADGE -->
+    <mat-form-field>
+      <mat-label>Badge</mat-label>
+      <mat-select formControlName="badge">
+        <mat-option value="hot">HOT</mat-option>
+        <mat-option value="bonus">BONUS</mat-option>
+        <mat-option value="weekend">WEEKEND</mat-option>
+      </mat-select>
+      <mat-error>Choose a badge</mat-error>
+    </mat-form-field>
+    <!-- POINTS -->
+    <mat-form-field>
+      <mat-label>Points reward</mat-label>
+      <input type="number" formControlName="pointsReward" matInput />
+      <mat-error>Points can not be 0 or less</mat-error>
+      <!-- todo: show error on custom validator -->
+    </mat-form-field>
+    <!-- MIN PURCHASE AMOUNT -->
+    <mat-form-field>
+      <mat-label>Min purchase amount</mat-label>
+      <input type="number" formControlName="minPurchaseAmount" matInput />
+      <mat-error>Amount can not be 0 or less</mat-error>
+      <!-- todo: show error on custom validator -->
+    </mat-form-field>
+    <!-- DATE -->
+    <mat-form-field class="example-form-field">
+      <mat-label>Choose date</mat-label>
+      <mat-date-range-input formGroupName="date" [rangePicker]="datePicker">
+        <input matStartDate placeholder="Start date" formControlName="start" />
+        <input matEndDate placeholder="End date" formControlName="end" />
+      </mat-date-range-input>
+      <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="datePicker"></mat-datepicker-toggle>
+      <mat-date-range-picker #datePicker></mat-date-range-picker>
+      <mat-error>Choose correct date</mat-error>
+    </mat-form-field>
+    <!-- ACTIVE -->
+    <mat-slide-toggle formControlName="isActive">Should be active?</mat-slide-toggle>
+    <div class="buttons">
+      <button type="submit" matButton="filled" [disabled]="!applyForm.valid">Apply changes</button>
+      <button type="button" (click)="closeModal()" matButton>Close</button>
+    </div>
+  </form>
+</article>

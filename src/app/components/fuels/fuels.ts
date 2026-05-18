@@ -40,7 +40,7 @@ interface FilterState {
 })
 export class Fuels {
   private dialog = inject(MatDialog);
-  protected openModal() {
+  protected openModal(): void {
     const openedDialog = this.dialog.open(ChangePriceComponent, { disableClose: true });
     openedDialog.afterClosed().subscribe((row: FuelModel) => {
       this.updateFuelRow(row);
@@ -91,7 +91,7 @@ export class Fuels {
     this.dataSource.filter = this.filterState.name;
   }
 
-  onToggleChange(filterName: string, event: MatSlideToggleChange): void {
+  toggleChange(filterName: string, event: MatSlideToggleChange): void {
     if (filterName === 'available') {
       this.filterState.available = event.checked;
       (this.dataSource.filter as any) = this.filterState.available;
@@ -101,10 +101,11 @@ export class Fuels {
     }
   }
 
-    onToggleChangeAvailability(id: string, event: MatSlideToggleChange): void{
-    this.fuelsList.updateFuelAvailability(+id, event.checked).subscribe((updatedFuel: FuelModel) => {
-      this.updateFuelRow(updatedFuel);
-    });
+  toggleChangeAvailability(id: string, event: MatSlideToggleChange): void {
+    this.fuelsList
+      .updateFuelAvailability(+id, event.checked)
+      .subscribe((updatedFuel: FuelModel) => {
+        this.updateFuelRow(updatedFuel);
+      });
   }
-
 }
