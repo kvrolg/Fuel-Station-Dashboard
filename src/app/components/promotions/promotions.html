@@ -1,8 +1,10 @@
 @if (promotions$ | async) {
+  @let data = dataSource;
+  
   <div class="edit">
     <button matButton="filled" (click)="openModal()">+ Add new</button>
   </div>
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <table mat-table [dataSource]="data" class="mat-elevation-z8">
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef>Title</th>
       <td mat-cell *matCellDef="let element">{{ element.title }}</td>
@@ -33,6 +35,13 @@
     <ng-container matColumnDef="pointsReward">
       <th mat-header-cell *matHeaderCellDef>Points</th>
       <td mat-cell *matCellDef="let element">{{ element.pointsReward }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+      <td mat-cell *matCellDef="let element">
+        <button matButton="outlined" (click)="openEditModal(element)">Edit</button>
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="keys"></tr>
