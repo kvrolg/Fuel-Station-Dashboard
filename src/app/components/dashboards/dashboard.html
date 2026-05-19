@@ -1,1 +1,131 @@
-<p>dashboard works!</p>
+@if (station$ | async) {
+  @let data = dataSource;
+
+  <article>
+    @for (item of data.data; track item) {
+      <!-- NAME -->
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>Station name</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ item.name }}</p>
+        </mat-card-content>
+        <mat-card-actions></mat-card-actions>
+      </mat-card>
+      <!-- ADRESS -->
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>Address</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ item.address }}</p>
+        </mat-card-content>
+        <mat-card-actions></mat-card-actions>
+      </mat-card>
+      <!-- OPENING HOURS -->
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>Opening hours</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ item.openHours }}</p>
+        </mat-card-content>
+        <mat-card-actions></mat-card-actions>
+      </mat-card>
+      <!-- RATING -->
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>Rating</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ item.rating }}</p>
+        </mat-card-content>
+        <mat-card-actions></mat-card-actions>
+      </mat-card>
+      <!-- LEVEL -->
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>Level</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ item.level }}</p>
+        </mat-card-content>
+        <mat-card-actions></mat-card-actions>
+      </mat-card>
+      <!-- EXPERIENCE POINTS -->
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>Experience points</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ item.experiencePoints }}</p>
+        </mat-card-content>
+        <mat-card-actions></mat-card-actions>
+      </mat-card>
+      <!-- COINS -->
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>Coins</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ item.coins }}</p>
+        </mat-card-content>
+        <mat-card-actions></mat-card-actions>
+      </mat-card>
+      <!-- DAILY CUSTOMERS -->
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>Daily customers</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ item.dailyCustomers }}</p>
+        </mat-card-content>
+        <mat-card-actions></mat-card-actions>
+      </mat-card>
+    }
+    <!-- AVAILABLE FUELS -->
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>Available fuels</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p></p>
+      </mat-card-content>
+      <mat-card-actions></mat-card-actions>
+    </mat-card>
+    <!-- AVAILABLE PROMOTIONS -->
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>Available promotions</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p></p>
+      </mat-card-content>
+      <mat-card-actions></mat-card-actions>
+    </mat-card>
+    <!-- AVAILABLE SERVICES -->
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>Available services</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p></p>
+      </mat-card-content>
+      <mat-card-actions></mat-card-actions>
+    </mat-card>
+  </article>
+} @else {
+  sd
+}
+
+<!-- AVAILABLE FUELS
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title></mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p></p>
+  </mat-card-content>
+  <mat-card-actions></mat-card-actions>
+</mat-card> -->

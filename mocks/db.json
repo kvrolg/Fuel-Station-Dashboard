@@ -16,7 +16,7 @@
   ],
   "fuels": [
     {
-      "id": 1,
+      "id": "1",
       "name": "PB95",
       "price": 6.59,
       "available": true,
@@ -33,7 +33,7 @@
       "premium": false
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "PB98",
       "price": 7.09,
       "available": true,
@@ -50,7 +50,7 @@
       "premium": true
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "ON",
       "price": 6.79,
       "available": true,
@@ -66,7 +66,7 @@
       "premium": false
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "ON Premium",
       "price": 7.19,
       "available": false,
@@ -82,7 +82,7 @@
       "premium": true
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "LPG",
       "price": 2.89,
       "available": true,
@@ -100,20 +100,7 @@
   ],
   "promotions": [
     {
-      "id": 1,
-      "title": "Happy Hours LPG",
-      "description": "W godzinach 18:00-20:00 LPG tańsze o 8 gr/l.",
-      "active": true,
-      "type": "fuel",
-      "startDate": "2026-05-01",
-      "endDate": "2026-05-31",
-      "badge": "HOT",
-      "pointsReward": 30,
-      "minPurchaseAmount": 50,
-      "fuelId": 5
-    },
-    {
-      "id": 2,
+      "id": "2",
       "title": "Kawa gratis",
       "description": "Przy tankowaniu powyżej 150 zł odbierz darmową kawę.",
       "active": true,
@@ -125,7 +112,7 @@
       "minPurchaseAmount": 150
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "Weekendowa myjnia",
       "description": "20% zniżki na myjnię w sobotę i niedzielę.",
       "active": false,
