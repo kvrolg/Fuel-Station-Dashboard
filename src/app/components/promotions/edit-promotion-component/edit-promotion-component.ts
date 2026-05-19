@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -14,7 +14,7 @@ import {
   MatDateRangeInput,
   MatDateRangePicker,
 } from '@angular/material/datepicker';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -23,7 +23,7 @@ import { Promotion } from '../../../models/promotion.model';
 import { PromotionService } from '../../../promotion-service';
 
 @Component({
-  selector: 'app-add-new-promotion-component',
+  selector: 'app-edit-promotion-component',
   providers: [provideNativeDateAdapter(), DatePipe],
   imports: [
     MatFormFieldModule,
@@ -38,10 +38,27 @@ import { PromotionService } from '../../../promotion-service';
     MatDateRangeInput,
     MatDatepickerModule,
   ],
-  templateUrl: './add-new-promotion-component.html',
-  styleUrl: './add-new-promotion-component.scss',
+  templateUrl: './edit-promotion-component.html',
+  styleUrl: './edit-promotion-component.scss',
 })
-export class AddNewPromotionComponent {
+export class EditPromotionComponent implements OnInit {
+  private editedRow = inject(MAT_DIALOG_DATA);
+  ngOnInit(): void {
+    this.applyForm.patchValue({
+      title: this.editedRow.title,
+      description: this.editedRow.description,
+      type: this.editedRow.type,
+      badge: this.editedRow.badge.toLowerCase(),
+      pointsReward: this.editedRow.pointsReward,
+      minPurchaseAmount: this.editedRow.minPurchaseAmount,
+      isActive: !!this.editedRow.active,
+      date: {
+        start: this.editedRow.startDate,
+        end: this.editedRow.endDate,
+      },
+    });
+  }
+
   private dialogRef = inject(MatDialogRef);
   private promotionService = inject(PromotionService);
   private datePipe = inject(DatePipe);
@@ -78,7 +95,7 @@ export class AddNewPromotionComponent {
       return;
     }
     const newPromotion: Promotion = {
-      id: Math.floor(Math.random() * 10),
+      id: this.editedRow.id,
       title: path.title ?? '',
       description: path.description ?? '',
       active: path.isActive ?? false,
@@ -89,7 +106,7 @@ export class AddNewPromotionComponent {
       pointsReward: path.pointsReward ?? 0,
       minPurchaseAmount: path.minPurchaseAmount ?? 0,
     };
-    this.promotionService.createPromotion(newPromotion).subscribe((update) => {
+    this.promotionService.updatePromotion(newPromotion.id, newPromotion).subscribe((update) => {
       this.dialogRef?.close(update);
     });
   }
