@@ -1,0 +1,9 @@
+article{
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+article > *{
+    margin: 20px 10px 0 10px;
+    box-shadow: 10px 10px 5px grey;
+}

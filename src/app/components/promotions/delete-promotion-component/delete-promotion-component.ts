@@ -15,7 +15,7 @@ export class DeletePromotionComponent {
   private promotionService = inject(PromotionService);
   private choosenRow = inject(MAT_DIALOG_DATA);
 
-  Apply() {
+  apply(): void {
     this.promotionService
       .deletePromotion(this.choosenRow.id)
       .subscribe((update) => this.dialogRef.close(update));

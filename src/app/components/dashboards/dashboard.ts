@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { DashboardService } from '../../dashboard-service';
 import { Observable, tap } from 'rxjs';
 import { Station } from '../../models/station.model';
 import { MatTableDataSource } from '@angular/material/table';
@@ -10,6 +9,7 @@ import { Promotions } from "../promotions/promotions";
 import { FuelService } from '../../fuel-service';
 import { FuelModel } from '../../models/fuel.model';
 import { MatIcon } from "@angular/material/icon";
+import { DashboardService } from '../../dashboard-service';
 
 @Component({
   selector: 'app-dashboard',

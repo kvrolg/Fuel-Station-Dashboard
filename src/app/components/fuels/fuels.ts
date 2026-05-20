@@ -2,7 +2,7 @@ import { Component, inject, ViewChild } from '@angular/core';
 import { FuelService } from '../../fuel-service';
 import { FuelModel } from '../../models/fuel.model';
 import { AsyncPipe } from '@angular/common';
-import { Observable, single, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
