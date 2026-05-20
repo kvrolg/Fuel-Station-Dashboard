@@ -9,10 +9,11 @@ import { Fuels } from "../fuels/fuels";
 import { Promotions } from "../promotions/promotions";
 import { FuelService } from '../../fuel-service';
 import { FuelModel } from '../../models/fuel.model';
+import { MatIcon } from "@angular/material/icon";
 
 @Component({
   selector: 'app-dashboard',
-  imports: [MatCardModule, AsyncPipe, Fuels, Promotions],
+  imports: [MatCardModule, AsyncPipe, Fuels, Promotions, MatIcon],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })

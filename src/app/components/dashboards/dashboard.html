@@ -4,55 +4,56 @@
   <article>
     @for (item of data.data; track item) {
       <!-- NAME -->
-      <mat-card appearance="outlined">
-        <mat-card-header>
-          <mat-card-title>{{ item.name }}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <mat-card-subtitle>Adress: {{item.address}}</mat-card-subtitle>
-          <mat-card-subtitle>Opening hours: {{item.openHours}}</mat-card-subtitle>
-        </mat-card-content>
-        <mat-card-actions></mat-card-actions>
+      <mat-card class="mainCard">
+        <div>
+          <mat-card-header class="iconPositioning">
+            <mat-card-title
+              >{{ item.name
+              }}<mat-icon style="margin-left: 8px; padding-top: 4px; height: 25px">star</mat-icon
+              >{{ item.rating }}</mat-card-title
+            >
+          </mat-card-header>
+          <mat-card-content class="iconPositioning">
+            <mat-icon>location_on</mat-icon>
+            <mat-card-subtitle>{{ item.address }}</mat-card-subtitle>
+          </mat-card-content>
+        </div>
+        <div>
+          <mat-card appearance="outlined" class="smallCards">
+            <div>
+
+              <mat-icon class="icon">schedule</mat-icon>
+            </div>
+            <mat-card-content>
+              <p>{{ item.openHours }}</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
       </mat-card>
       <!-- RATING -->
-      <mat-card appearance="outlined">
-        <mat-card-header>
-          <mat-card-title>Rating</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>{{ item.rating }}</p>
-        </mat-card-content>
-        <mat-card-actions></mat-card-actions>
-      </mat-card>
-      <!-- LEVEL -->
-      <mat-card appearance="outlined">
-        <mat-card-header>
-          <mat-card-title>Level</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>{{ item.level }}</p>
-        </mat-card-content>
-        <mat-card-actions></mat-card-actions>
-      </mat-card>
       <!-- EXPERIENCE POINTS -->
-      <mat-card appearance="outlined">
-        <mat-card-header>
-          <mat-card-title>Experience points</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>{{ item.experiencePoints }}</p>
-        </mat-card-content>
-        <mat-card-actions></mat-card-actions>
+      <mat-card appearance="outlined" class="smallCards">
+        <mat-icon class="icon">call_made</mat-icon>
+        <div>
+          <mat-card-header>
+            <mat-card-title>LEVEL {{ item.level }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{ item.experiencePoints }}/{{ item.nextLevelXp }}</p>
+          </mat-card-content>
+        </div>
       </mat-card>
       <!-- COINS -->
-      <mat-card appearance="outlined">
-        <mat-card-header>
-          <mat-card-title>Coins</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>{{ item.coins }}</p>
-        </mat-card-content>
-        <mat-card-actions></mat-card-actions>
+      <mat-card appearance="outlined" class="smallCards">
+        <mat-icon class="icon">attach_money</mat-icon>
+        <div>
+          <mat-card-header>
+            <mat-card-title>Daily income</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>${{ item.coins }}</p>
+          </mat-card-content>
+        </div>
       </mat-card>
       <!-- DAILY CUSTOMERS -->
       <mat-card appearance="outlined">
@@ -73,9 +74,8 @@
       <mat-card-content>
         <ul>
           @for (fuel of fuelsData.data; track fuel) {
-            <li>{{fuel.name}}</li>
+            <li>{{ fuel.name }}</li>
           }
-
         </ul>
       </mat-card-content>
       <mat-card-actions></mat-card-actions>
