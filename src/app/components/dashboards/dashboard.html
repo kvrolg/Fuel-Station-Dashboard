@@ -1,4 +1,4 @@
-@if ((station$ | async) && fuels$ | async) {
+@if ((station$ | async) && (fuels$ | async) && (promotions$ | async) && (services$ | async)) {
   @let data = dataSource;
 
   <article>
@@ -83,10 +83,14 @@
     <!-- AVAILABLE PROMOTIONS -->
     <mat-card appearance="outlined">
       <mat-card-header>
-        <mat-card-title>Available promotions</mat-card-title>
+        <mat-card-title>Active promotions</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <p></p>
+        <ul>
+          @for(promotion of promotionsData.data; track promotion){
+            <li>{{promotion.title}}</li>
+          }
+        </ul>
       </mat-card-content>
       <mat-card-actions></mat-card-actions>
     </mat-card>
@@ -96,7 +100,11 @@
         <mat-card-title>Available services</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <p></p>
+        <ul>
+          @for(service of servicesData.data; track service){
+            <li>{{service.name}}</li>
+          }
+        </ul>
       </mat-card-content>
       <mat-card-actions></mat-card-actions>
     </mat-card>

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Promotion } from './models/promotion.model';
 
 @Injectable({
@@ -13,18 +13,27 @@ export class PromotionService {
   getPromotions(): Observable<Promotion[]> {
     return this.http.get<Promotion[]>(this.url);
   }
+
   getPromotionById(id: number): Observable<Promotion> {
     return this.http.get<Promotion>(`${this.url}/${id}`);
   }
+
+  getActivePromotions(): Observable<Promotion[]>{
+      return this.http.get<Promotion[]>(this.url).pipe(map(fuels => fuels.filter(fuel => fuel.active)))
+    }
+
   createPromotion(promotion: Promotion): Observable<Promotion> {
     return this.http.post<Promotion>(this.url, promotion);
   }
+  
   updatePromotion(id: number, promotion: Promotion): Observable<Promotion> {
     return this.http.patch<Promotion>(`${this.url}/${id}`, promotion);
   }
+
   replacePromotion(id: number, promotion: Promotion): Observable<Promotion> {
     return this.http.put<Promotion>(`${this.url}/${id}`, promotion);
   }
+
   deletePromotion(id: number): Observable<void> {
     return this.http.delete<void>(`${this.url}/${id}`);
   }
