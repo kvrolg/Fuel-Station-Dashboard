@@ -4,22 +4,22 @@
   <article>
     @for (item of data.data; track item) {
       <!-- NAME -->
-      <mat-card class="mainCard">
+      <mat-card class="main-card">
         <div>
-          <mat-card-header class="iconPositioning">
+          <mat-card-header class="icon-positioning">
             <mat-card-title
               >{{ item.name
               }}<mat-icon style="margin-left: 8px; padding-top: 4px; height: 25px">star</mat-icon
               >{{ item.rating }}</mat-card-title
             >
           </mat-card-header>
-          <mat-card-content class="iconPositioning">
+          <mat-card-content class="icon-positioning">
             <mat-icon>location_on</mat-icon>
             <mat-card-subtitle>{{ item.address }}</mat-card-subtitle>
           </mat-card-content>
         </div>
         <div>
-          <mat-card appearance="outlined" class="smallCards">
+          <mat-card appearance="outlined" class="small-cards">
             <div>
 
               <mat-icon class="icon">schedule</mat-icon>
@@ -32,7 +32,7 @@
       </mat-card>
       <!-- RATING -->
       <!-- EXPERIENCE POINTS -->
-      <mat-card appearance="outlined" class="smallCards">
+      <mat-card appearance="outlined" class="small-cards">
         <mat-icon class="icon">call_made</mat-icon>
         <div>
           <mat-card-header>
@@ -44,7 +44,7 @@
         </div>
       </mat-card>
       <!-- COINS -->
-      <mat-card appearance="outlined" class="smallCards">
+      <mat-card appearance="outlined" class="small-cards">
         <mat-icon class="icon">attach_money</mat-icon>
         <div>
           <mat-card-header>
