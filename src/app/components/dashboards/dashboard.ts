@@ -7,6 +7,8 @@ import {MatCardModule} from '@angular/material/card';
 import { AsyncPipe } from '@angular/common';
 import { Fuels } from "../fuels/fuels";
 import { Promotions } from "../promotions/promotions";
+import { FuelService } from '../../fuel-service';
+import { FuelModel } from '../../models/fuel.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,8 +18,11 @@ import { Promotions } from "../promotions/promotions";
 })
 export class Dashboard {
   private dashboardService = inject(DashboardService);
+  private fuelsService = inject(FuelService)
   dataSource = new MatTableDataSource<Station>();
+  fuelsData = new MatTableDataSource<FuelModel>();
 
   station$: Observable<Station[]> = this.dashboardService.getStation().pipe(tap((items) => this.dataSource.data = items))
+  fuels$: Observable<FuelModel[]> = this.fuelsService.getAvailableFuels().pipe(tap((items) => this.fuelsData.data = items))
 
 }
