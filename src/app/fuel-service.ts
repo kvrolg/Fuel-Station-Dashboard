@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { FuelModel } from './models/fuel.model';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +12,10 @@ export class FuelService {
 
  getFuels(): Observable<FuelModel[]>{
     return this.http.get<FuelModel[]>(this.url)
+  }
+
+  getAvailableFuels(): Observable<FuelModel[]>{
+    return this.http.get<FuelModel[]>(this.url).pipe(map(fuels => fuels.filter(fuel => fuel.available)))
   }
   
   updateFuelPrice(id: number, priceValue: number ): Observable<FuelModel>{

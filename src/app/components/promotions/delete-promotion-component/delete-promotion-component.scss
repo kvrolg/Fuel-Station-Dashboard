@@ -1,0 +1,43 @@
+@use '@angular/material' as mat;
+
+article{
+    display: grid;
+    padding: 20px;
+}
+button{
+    display: inline-block;
+    width: auto;
+    color: black;
+    margin-left: 5px;
+}
+div{
+    margin-top: 15px;
+}
+hr{
+    width: 100%;
+}
+p{
+    margin: 2px;
+    color: rgb(172, 80, 73);
+}
+h1{
+    margin-bottom: 10px;
+}
+
+.warning{
+    background-color: rgba(248, 215, 218);
+    margin: 5px 0 0 0;
+    padding: 5px 0 5px 0;
+    border-radius: 10px;
+    border: 1px solid rgb(172, 80, 73);
+}
+
+.buttons{
+    text-align: right;
+}
+
+:host {
+  @include mat.button-overrides((
+    filled-container-color: rgba(220, 53, 69),
+  ));
+}

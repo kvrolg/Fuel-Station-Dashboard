@@ -29,6 +29,14 @@ tr:nth-child(even) {
   .mat-field {
     padding: 15px 0 0 0;
   }
+  .change-price{
+    @include mat.button-overrides(());
+    box-shadow: 5px 5px 7px grey;
+  }
+  .change-price:hover{
+    @include mat.button-overrides(());
+    box-shadow: 2px 2px 5px grey;
+  }
 }
 
 .filtering {
