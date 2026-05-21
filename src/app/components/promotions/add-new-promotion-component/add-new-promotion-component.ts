@@ -21,6 +21,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { Promotion } from '../../../models/promotion.model';
 import { PromotionService } from '../../../promotion-service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-new-promotion-component',
@@ -45,6 +46,7 @@ export class AddNewPromotionComponent {
   private dialogRef = inject(MatDialogRef);
   private promotionService = inject(PromotionService);
   private datePipe = inject(DatePipe);
+  private snackBar = inject(MatSnackBar);
 
   applyForm = new FormGroup({
     title: new FormControl<string>('', Validators.required),
@@ -89,6 +91,8 @@ export class AddNewPromotionComponent {
       pointsReward: path.pointsReward ?? 0,
       minPurchaseAmount: path.minPurchaseAmount ?? 0,
     };
+
+    this.snackBar.open('Added new promotion successfully!', 'Dismiss', {duration:3000, panelClass: ['snackbar-success'], horizontalPosition: 'end'});
     this.promotionService.createPromotion(newPromotion).subscribe((update) => {
       this.dialogRef?.close(update);
     });

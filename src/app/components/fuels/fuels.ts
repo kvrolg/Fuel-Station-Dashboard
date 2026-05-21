@@ -115,7 +115,7 @@ export class Fuels implements AfterViewInit{
       });
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit(): void{
     this.dataSource.sort = this.sort
   }
 
