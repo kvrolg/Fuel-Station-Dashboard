@@ -21,43 +21,51 @@
       filled-label-text-weight: 550,
       filled-label-text-size: 16px,
       filled-horizontal-padding: 9px,
-      protected-container-elevation-shadow: 10px 10px 10px
+      protected-container-elevation-shadow: 10px 10px 10px,
     )
   );
-  @include mat.fab-overrides((
-    container-color: var(--tertiary-color),
-    small-container-elevation-shadow: 5px 0 10px grey
-  ));
-  .delete{
+  @include mat.fab-overrides(
+    (
+      container-color: var(--tertiary-color),
+      small-container-elevation-shadow: 5px 0 10px grey,
+    )
+  );
+  .delete {
     @include mat.fab-overrides(());
     margin-left: 5px;
-    transition: 0.4s
+    transition: 0.4s;
   }
-  .delete:hover{
+  .delete:hover {
     @include mat.fab-overrides(());
     margin-left: 5px;
-    background-color: red,
+    background-color: red;
   }
-  .add{
+  .add {
     @include mat.button-overrides(());
     box-shadow: 5px 5px 7px grey;
   }
-  .add:hover{
+  .add:hover {
     @include mat.button-overrides(());
     box-shadow: 2px 2px 5px grey;
   }
 }
 
-.edit{
-    padding-top: 20px;
-    padding-left: 10px;
-    height: 76px;
+.edit {
+  padding-top: 25px;
+  padding-left: 10px;
+  height: 96px;
 }
 
 tr:nth-child(even) {
   background-color: var(--mat-sys-secondary-fixed);
 }
 
-td{
+td {
   height: 60px;
+}
+
+article {
+  border: 2px groove black;
+  margin: 0 8px 0 0;
+  border-radius: 5px;
 }

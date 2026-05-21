@@ -16,7 +16,7 @@ tr:nth-child(even) {
       filled-container-shape: 5px,
       filled-container-height: 50px,
       filled-label-text-weight: 550,
-      filled-label-text-size: 16px
+      filled-label-text-size: 16px,
     )
   );
   ::ng-deep .mat-mdc-table th {
@@ -29,11 +29,11 @@ tr:nth-child(even) {
   .mat-field {
     padding: 15px 0 0 0;
   }
-  .change-price{
+  .changePrice {
     @include mat.button-overrides(());
     box-shadow: 5px 5px 7px grey;
   }
-  .change-price:hover{
+  .changePrice:hover {
     @include mat.button-overrides(());
     box-shadow: 2px 2px 5px grey;
   }
@@ -49,4 +49,10 @@ tr:nth-child(even) {
 .filtering > * {
   position: relative;
   margin: 5px 15px 0 15px;
+}
+
+article {
+  border: 2px groove black;
+  margin: 0 8px 0 0;
+  border-radius: 5px;
 }

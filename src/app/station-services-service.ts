@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { StationService } from './models/stationService.model';
 
 @Injectable({
@@ -12,5 +12,9 @@ export class StationServicesService {
 
   getServices(): Observable<StationService[]>{
     return this.http.get<StationService[]>(this.url);
+  }
+
+  getAvailableServices(): Observable<StationService[]>{
+    return this.http.get<StationService[]>(this.url).pipe(map(fuels => fuels.filter(fuel => fuel.available)))
   }
 }

@@ -1,0 +1,48 @@
+@use '@angular/material' as mat;
+
+:host {
+  @include mat.card-overrides(
+    (
+      outlined-container-color: rgb(201, 198, 193),
+      elevated-container-elevation: red,
+    )
+    
+  );
+  .small-cards {
+    @include mat.card-overrides(());
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 5px;
+    div{
+    background-color: var(--mat-sys-primary-fixed);
+    border-radius: 5px;
+  }
+  }
+
+  .icon {
+    font-size: 50px;
+    height: auto;
+    width: auto;
+  }
+  .main-card {
+    @include mat.card-overrides(());
+    grid-column: 1/3;
+    display: grid;
+    grid-template-columns: 60% 40%;
+  }
+  .icon-positioning {
+    display: flex;
+  }
+  article > *{
+    border-radius: 2px;
+    border: 1px solid grey;
+    margin: 5px;
+  }
+}
+
+article {
+  margin: 10px 0 0 0;
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+}
+

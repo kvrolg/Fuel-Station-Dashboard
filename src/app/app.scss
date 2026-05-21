@@ -1,0 +1,15 @@
+.parent {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 8px;
+}
+
+.nav {
+  grid-row: 1 / 7;
+}
+
+.content {
+  grid-column:  2 / span 7;
+  grid-row: span 5 / span 5;
+}
