@@ -14,7 +14,7 @@
   </div>
 
   <article>
-    <table mat-table [dataSource]="data" class="mat-elevation-z8" matSort>
+    <table mat-table [dataSource]="data" class="mat-elevation-z8" matSort (matSortChange)="announceSortChange($event)">
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
         <td mat-cell *matCellDef="let element">{{ element.name }}</td>
@@ -28,7 +28,7 @@
         <td mat-cell *matCellDef="let element">{{ element.category }}</td>
       </ng-container>
       <ng-container matColumnDef="available">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Available</th>
+        <th mat-header-cell *matHeaderCellDef>Available</th>
         <td mat-cell *matCellDef="let element">
           <mat-slide-toggle
             (change)="toggleChangeAvailability(element.id, $event)"
@@ -38,13 +38,13 @@
         </td>
       </ng-container>
       <ng-container matColumnDef="stockLevel">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Stock level</th>
+        <th mat-header-cell *matHeaderCellDef>Stock level</th>
         <td mat-cell *matCellDef="let element">
           {{ element.stockLevel ? element.stockLevel : '-' }} / {{ element.stockCapacity }}
         </td>
       </ng-container>
       <ng-container matColumnDef="premium">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Premium</th>
+        <th mat-header-cell *matHeaderCellDef>Premium</th>
         <td mat-cell *matCellDef="let element">{{ element.premium ? 'Yes' : 'No' }}</td>
       </ng-container>
 

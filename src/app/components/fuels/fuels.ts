@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, inject, ViewChild } from '@angular/core';
 import { FuelService } from '../../fuel-service';
 import { FuelModel } from '../../models/fuel.model';
 import { AsyncPipe } from '@angular/common';
@@ -13,9 +13,10 @@ import {
   MatSlideToggleChange,
 } from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { ChangePriceComponent } from './change-price-component/change-price-component';
 import { MatDialog } from '@angular/material/dialog';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 interface FilterState {
   name: string;
@@ -34,13 +35,26 @@ interface FilterState {
     MatSlideToggle,
     MatSlideToggleModule,
     FormsModule,
+    MatSortModule
+    
   ],
   templateUrl: './fuels.html',
   styleUrl: './fuels.scss',
 })
-export class Fuels {
+export class Fuels implements AfterViewInit{
+  keys: string[] = ['name', 'price', 'category', 'available', 'stockLevel', 'premium'];
+  dataSource = new MatTableDataSource<FuelModel>();
   private dialog = inject(MatDialog);
+  private _liveAnnouncer = inject(LiveAnnouncer)
+  private fuelsList = inject(FuelService);
+  defaultSort: MatSort | undefined;
+  filterState: FilterState = { name: '', available: null, premium: null };
+  
+  @ViewChild(MatSort) set sort(value: MatSort) {
+    this.dataSource.sort = value;
+  }
   protected openModal(): void {
+    
     const openedDialog = this.dialog.open(ChangePriceComponent, { disableClose: true });
     openedDialog.afterClosed().subscribe((row: FuelModel) => {
       this.updateFuelRow(row);
@@ -56,12 +70,6 @@ export class Fuels {
     }
   }
 
-  @ViewChild(MatSort) set sort(value: MatSort) {
-    this.dataSource.sort = value;
-  }
-  private fuelsList = inject(FuelService);
-  defaultSort: MatSort | undefined;
-  filterState: FilterState = { name: '', available: null, premium: null };
 
   fuels$: Observable<FuelModel[]> = this.fuelsList.getFuels().pipe(
     tap((items) => {
@@ -84,8 +92,6 @@ export class Fuels {
     }),
   );
 
-  keys: string[] = ['name', 'price', 'category', 'available', 'stockLevel', 'premium'];
-  dataSource = new MatTableDataSource<FuelModel>();
   applyFilter(event: Event): void {
     this.filterState.name = (event.target as HTMLInputElement).value.trim().toLowerCase();
     this.dataSource.filter = this.filterState.name;
@@ -108,4 +114,16 @@ export class Fuels {
         this.updateFuelRow(updatedFuel);
       });
   }
+
+  ngAfterViewInit(){
+    this.dataSource.sort = this.sort
+  }
+
+  announceSortChange(sortState: Sort): void{
+    if(sortState.direction){
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else{
+      this._liveAnnouncer.announce(`Sorting cleared`);
+    }
+    }
 }
