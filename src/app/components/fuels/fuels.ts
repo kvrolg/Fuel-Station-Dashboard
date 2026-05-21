@@ -17,6 +17,7 @@ import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { ChangePriceComponent } from './change-price-component/change-price-component';
 import { MatDialog } from '@angular/material/dialog';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { MatProgressSpinner } from "@angular/material/progress-spinner";
 
 interface FilterState {
   name: string;
@@ -35,9 +36,9 @@ interface FilterState {
     MatSlideToggle,
     MatSlideToggleModule,
     FormsModule,
-    MatSortModule
-    
-  ],
+    MatSortModule,
+    MatProgressSpinner
+],
   templateUrl: './fuels.html',
   styleUrl: './fuels.scss',
 })
@@ -115,7 +116,7 @@ export class Fuels implements AfterViewInit{
       });
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit(): void{
     this.dataSource.sort = this.sort
   }
 

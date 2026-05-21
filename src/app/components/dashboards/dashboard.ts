@@ -15,6 +15,7 @@ import { PromotionService } from '../../promotion-service';
 import { StationServicesService } from '../../station-services-service';
 import { Fuels } from '../fuels/fuels';
 import { Promotions } from '../promotions/promotions';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,6 +28,7 @@ import { Promotions } from '../promotions/promotions';
     MatProgressBarModule,
     DecimalPipe,
     MatTableModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',

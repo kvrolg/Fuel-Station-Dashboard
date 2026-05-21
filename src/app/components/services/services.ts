@@ -6,10 +6,11 @@ import { Observable, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatCardActions, MatCardSubtitle } from "@angular/material/card";
 import { MatIcon } from "@angular/material/icon";
+import { MatProgressSpinner } from "@angular/material/progress-spinner";
 
 @Component({
   selector: 'app-services',
-  imports: [AsyncPipe, MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatCardActions, MatIcon, MatCardSubtitle],
+  imports: [AsyncPipe, MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatCardActions, MatIcon, MatCardSubtitle, MatProgressSpinner],
   templateUrl: './services.html',
   styleUrl: './services.scss',
 })

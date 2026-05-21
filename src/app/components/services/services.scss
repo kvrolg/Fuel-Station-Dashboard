@@ -1,9 +1,20 @@
-article{
-    display: grid;
-    grid-template-columns: auto auto auto;
+article {
+  display: grid;
+  grid-template-columns: auto auto auto;
 }
 
-article > *{
-    margin: 20px 10px 0 10px;
-    box-shadow: 10px 10px 5px grey;
+article > * {
+  margin: 20px 10px 0 10px;
+  box-shadow: 10px 10px 5px grey;
+}
+
+:host {
+  ::ng-deep .grid-spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    svg {
+      max-width: 200px !important;
+    }
+  }
 }

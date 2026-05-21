@@ -10,6 +10,7 @@ import { PromotionService } from '../../promotion-service';
 import { AddNewPromotionComponent } from './add-new-promotion-component/add-new-promotion-component';
 import { EditPromotionComponent } from './edit-promotion-component/edit-promotion-component';
 import { DeletePromotionComponent } from './delete-promotion-component/delete-promotion-component';
+import { MatProgressSpinner } from "@angular/material/progress-spinner";
 
 @Component({
   selector: 'app-promotions',
@@ -21,7 +22,8 @@ import { DeletePromotionComponent } from './delete-promotion-component/delete-pr
     MatIconModule,
     MatIcon,
     MatMiniFabButton,
-  ],
+    MatProgressSpinner
+],
   templateUrl: './promotions.html',
   styleUrl: './promotions.scss',
 })

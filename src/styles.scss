@@ -5,6 +5,7 @@
 // custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 @use '../src/app/styles/reset.scss' as *;
+@use '../src/app/styles/snackbar.scss';
 
 html {
   height: 100%;
