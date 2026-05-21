@@ -1,4 +1,4 @@
-@if ((station$ | async) && (fuels$ | async) && (promotions$ | async) && (services$ | async)) {
+@if ((station$ | async) || (fuels$ | async) || (promotions$ | async) || (services$ | async)) {
   @let data = dataSource;
 
   <article>
