@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -19,9 +19,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { FormMode } from '../../../models/form.model';
 import { Promotion } from '../../../models/promotion.model';
 import { PromotionService } from '../../../promotion-service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-edit-promotion-component',
@@ -43,27 +43,32 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './edit-promotion-component.scss',
 })
 export class EditPromotionComponent implements OnInit {
-  private editedRow = inject(MAT_DIALOG_DATA);
-  private snackBar = inject(MatSnackBar);
-  ngOnInit(): void {
-    this.applyForm.patchValue({
-      title: this.editedRow.title,
-      description: this.editedRow.description,
-      type: this.editedRow.type,
-      badge: this.editedRow.badge.toLowerCase(),
-      pointsReward: this.editedRow.pointsReward,
-      minPurchaseAmount: this.editedRow.minPurchaseAmount,
-      isActive: !!this.editedRow.active,
-      date: {
-        start: this.editedRow.startDate,
-        end: this.editedRow.endDate,
-      },
-    });
-  }
-
   private dialogRef = inject(MatDialogRef);
   private promotionService = inject(PromotionService);
   private datePipe = inject(DatePipe);
+  private editedRow = inject(MAT_DIALOG_DATA);
+
+  @Input() mode: FormMode = 'add';
+  isEditMode: boolean = false;
+
+  ngOnInit(): void {
+    this.isEditMode = this.mode === 'edit';
+    if (this.isEditMode) {
+      this.applyForm.patchValue({
+        title: this.editedRow.title,
+        description: this.editedRow.description,
+        type: this.editedRow.type,
+        badge: this.editedRow.badge.toLowerCase(),
+        pointsReward: this.editedRow.pointsReward,
+        minPurchaseAmount: this.editedRow.minPurchaseAmount,
+        isActive: !!this.editedRow.active,
+        date: {
+          start: this.editedRow.startDate,
+          end: this.editedRow.endDate,
+        },
+      });
+    }
+  }
 
   applyForm = new FormGroup({
     title: new FormControl<string>('', Validators.required),
@@ -97,7 +102,7 @@ export class EditPromotionComponent implements OnInit {
       return;
     }
     const newPromotion: Promotion = {
-      id: this.editedRow.id,
+      id: !this.isEditMode ? Math.floor(Math.random() * 10) : this.editedRow.id,
       title: path.title ?? '',
       description: path.description ?? '',
       active: path.isActive ?? false,
@@ -109,9 +114,14 @@ export class EditPromotionComponent implements OnInit {
       minPurchaseAmount: path.minPurchaseAmount ?? 0,
     };
 
-    this.snackBar.open('Edited promotion successfully!', 'Dismiss', {duration:3000, panelClass: ['snackbar-success'], horizontalPosition: 'end'});
-    this.promotionService.updatePromotion(newPromotion.id, newPromotion).subscribe((update) => {
-      this.dialogRef?.close(update);
-    });
+    if (this.isEditMode) {
+      this.promotionService.updatePromotion(newPromotion.id, newPromotion).subscribe((update) => {
+        this.dialogRef?.close(update);
+      });
+    } else {
+      this.promotionService.createPromotion(newPromotion).subscribe((update) => {
+        this.dialogRef?.close(update);
+      });
+    }
   }
 }

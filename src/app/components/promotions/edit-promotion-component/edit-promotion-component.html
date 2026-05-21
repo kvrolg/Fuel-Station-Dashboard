@@ -1,5 +1,5 @@
 <article>
-  <h1>Edit the promotion</h1>
+  <h1>{{isEditMode ? 'Edit the promotion' : 'Add new'}}</h1>
   <form [formGroup]="applyForm" (ngSubmit)="submitApplication()">
     <!-- TITLE -->
     <mat-form-field>
