@@ -6,17 +6,16 @@
       outlined-container-color: rgb(201, 198, 193),
       elevated-container-elevation: red,
     )
-    
   );
   .small-cards {
     @include mat.card-overrides(());
     display: grid;
     grid-template-columns: auto auto;
     padding: 5px;
-    div{
-    background-color: var(--mat-sys-primary-fixed);
-    border-radius: 5px;
-  }
+    div {
+      background-color: var(--mat-sys-primary-fixed);
+      border-radius: 5px;
+    }
   }
 
   .icon {
@@ -33,10 +32,18 @@
   .icon-positioning {
     display: flex;
   }
-  article > *{
+  article > * {
     border-radius: 2px;
     border: 1px solid grey;
     margin: 5px;
+  }
+  ::ng-deep .grid-spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    svg {
+      max-width: 200px !important;
+    }
   }
 }
 
@@ -45,4 +52,3 @@ article {
   display: grid;
   grid-template-columns: repeat(5, auto);
 }
-

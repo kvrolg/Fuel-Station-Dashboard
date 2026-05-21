@@ -48,6 +48,14 @@
     @include mat.button-overrides(());
     box-shadow: 2px 2px 5px grey;
   }
+  ::ng-deep .grid-spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    svg {
+      max-width: 200px !important;
+    }
+  }
 }
 
 .edit {
