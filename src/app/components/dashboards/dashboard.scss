@@ -43,6 +43,6 @@
 article {
   margin: 10px 0 0 0;
   display: grid;
-  grid-template-columns: auto auto auto auto auto;
+  grid-template-columns: repeat(5, auto);
 }
 
