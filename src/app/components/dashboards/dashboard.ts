@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Observable, tap } from 'rxjs';
 import { DashboardService } from '../../dashboard-service';
@@ -13,17 +14,12 @@ import { Station } from '../../models/station.model';
 import { StationService } from '../../models/stationService.model';
 import { PromotionService } from '../../promotion-service';
 import { StationServicesService } from '../../station-services-service';
-import { Fuels } from '../fuels/fuels';
-import { Promotions } from '../promotions/promotions';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-dashboard',
   imports: [
     MatCardModule,
     AsyncPipe,
-    Fuels,
-    Promotions,
     MatIcon,
     MatProgressBarModule,
     DecimalPipe,
