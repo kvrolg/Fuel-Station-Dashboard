@@ -29,7 +29,6 @@
           </mat-card>
         </div>
       </mat-card>
-      <!-- RATING -->
       <!-- EXPERIENCE POINTS -->
       <mat-card appearance="outlined" class="small-cards">
         <mat-icon class="icon">call_made</mat-icon>
@@ -38,6 +37,10 @@
             <mat-card-title>LEVEL {{ item.level }}</mat-card-title>
           </mat-card-header>
           <mat-card-content>
+            <mat-progress-bar
+                mode="determinate"
+                [value]="(item.experiencePoints * 100) / item.nextLevelXp | number: '1.0-0'"
+              ></mat-progress-bar>
             <p>{{ item.experiencePoints }}/{{ item.nextLevelXp }}</p>
           </mat-card-content>
         </div>
@@ -144,16 +147,5 @@
     </mat-card>
   </article>
 } @else {
-  sd
+  no data
 }
-
-<!-- AVAILABLE FUELS
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title></mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <p></p>
-  </mat-card-content>
-  <mat-card-actions></mat-card-actions>
-</mat-card> -->
