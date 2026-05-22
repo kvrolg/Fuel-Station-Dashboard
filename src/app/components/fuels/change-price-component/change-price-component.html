@@ -14,6 +14,7 @@
     <mat-form-field>
       <mat-label for="priceOfFuel">Set a price:</mat-label>
       <input type="number" id="priceOfFuel" formControlName="priceOfFuel" matInput />
+      <mat-error>Provide correct price!</mat-error>
     </mat-form-field>
     <button type="submit" matButton="filled" [disabled]="!applyForm.valid">Apply changes</button>
   </form>
