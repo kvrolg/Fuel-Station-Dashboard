@@ -1,10 +1,12 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { AsyncPipe, NgClass, NgIf, NgStyle } from '@angular/common';
-import { AfterViewInit, Component, inject, ViewChild } from '@angular/core';
+import { AsyncPipe, NgClass, NgIf } from '@angular/common';
+import { AfterViewInit, Component, DestroyRef, inject, ViewChild } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import {
@@ -18,7 +20,6 @@ import { Observable, tap } from 'rxjs';
 import { FuelService } from '../../fuel-service';
 import { FuelModel } from '../../models/fuel.model';
 import { ChangePriceComponent } from './change-price-component/change-price-component';
-import { MatIcon } from "@angular/material/icon";
 
 interface FilterState {
   name: string;
@@ -53,6 +54,7 @@ export class Fuels implements AfterViewInit {
   private dialog = inject(MatDialog);
   private _liveAnnouncer = inject(LiveAnnouncer);
   private fuelsList = inject(FuelService);
+  private destroyRef = inject(DestroyRef);
   defaultSort: MatSort | undefined;
   filterState: FilterState = { name: '', available: null, premium: null };
 
@@ -61,9 +63,12 @@ export class Fuels implements AfterViewInit {
   }
   protected openModal(): void {
     const openedDialog = this.dialog.open(ChangePriceComponent, { disableClose: true });
-    openedDialog.afterClosed().subscribe((row: FuelModel) => {
-      this.updateFuelRow(row);
-    });
+    openedDialog
+      .afterClosed()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((row: FuelModel) => {
+        this.updateFuelRow(row);
+      });
   }
 
   updateFuelRow(updatedRow: FuelModel): void {
@@ -114,6 +119,7 @@ export class Fuels implements AfterViewInit {
   toggleChangeAvailability(id: string, event: MatSlideToggleChange): void {
     this.fuelsList
       .updateFuelAvailability(+id, event.checked)
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((updatedFuel: FuelModel) => {
         this.updateFuelRow(updatedFuel);
       });
@@ -131,11 +137,11 @@ export class Fuels implements AfterViewInit {
     }
   }
 
-  get cheapestPrice(): number{
+  get cheapestPrice(): number {
     const newTable = this.dataSource.data;
-    if(!newTable){
+    if (!newTable) {
       return 0;
     }
-    return Math.min(...newTable.map(fuel => fuel.price))
+    return Math.min(...newTable.map((fuel) => fuel.price));
   }
 }

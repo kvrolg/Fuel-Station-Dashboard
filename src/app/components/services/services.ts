@@ -1,20 +1,21 @@
-import { Component, inject, ChangeDetectorRef } from '@angular/core';
-import { StationServicesService } from '../../station-services-service';
-import { MatTableDataSource } from '@angular/material/table';
-import { StationService } from '../../models/stationService.model';
-import { Observable, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { ChangeDetectorRef, Component, DestroyRef, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   MatCard,
-  MatCardHeader,
-  MatCardTitle,
-  MatCardContent,
   MatCardActions,
+  MatCardContent,
+  MatCardHeader,
   MatCardSubtitle,
+  MatCardTitle,
 } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatSlideToggle, MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { MatTableDataSource } from '@angular/material/table';
+import { Observable, tap } from 'rxjs';
+import { StationService } from '../../models/stationService.model';
+import { StationServicesService } from '../../station-services-service';
 
 @Component({
   selector: 'app-services',
@@ -36,6 +37,7 @@ import { MatSlideToggle, MatSlideToggleChange } from '@angular/material/slide-to
 export class Services {
   private StationServices = inject(StationServicesService);
   private changeDetector = inject(ChangeDetectorRef);
+  private destroyRef = inject(DestroyRef);
   dataSource = new MatTableDataSource<StationService>();
 
   services$: Observable<StationService[]> = this.StationServices.getServices().pipe(
@@ -53,8 +55,9 @@ export class Services {
   }
 
   toggleChangeAvailability(id: number, event: MatSlideToggleChange): void {
-    this.StationServices.updaterServicesAvailability(+id, event.checked).subscribe(
-      (updatedService: StationService) => this.updateServiceCard(updatedService),
-    );
+    console.log(id);
+    this.StationServices.updaterServicesAvailability(+id, event.checked)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((updatedService: StationService) => this.updateServiceCard(updatedService));
   }
 }
