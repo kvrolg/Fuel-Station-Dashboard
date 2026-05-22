@@ -14,14 +14,17 @@
         <mat-card-content>
           <mat-card-subtitle>Description:</mat-card-subtitle>
           <p>{{ element.description }}</p>
-          <mat-card-subtitle>Level: {{ element.level }}</mat-card-subtitle>
-          <mat-card-subtitle>Available: {{ element.available ? 'Yes' : 'No' }}</mat-card-subtitle>
+          <mat-card-subtitle>Level: {{ element.level }} {{element.id}}</mat-card-subtitle>
+          <mat-card-subtitle>Available: <mat-slide-toggle
+            (change)="toggleChangeAvailability(element.id, $event)"
+            [checked]="element.available"
+            >{{ element.available ? 'Yes' : 'No' }}</mat-slide-toggle
+          ></mat-card-subtitle>
         </mat-card-content>
         <mat-card-actions></mat-card-actions>
       </mat-card>
     }
   </article>
 } @else {
-  no data
   <mat-spinner [diameter]="50" class="grid-spinner"></mat-spinner>
 }

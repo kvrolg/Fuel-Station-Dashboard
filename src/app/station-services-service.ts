@@ -17,4 +17,8 @@ export class StationServicesService {
   getAvailableServices(): Observable<StationService[]>{
     return this.http.get<StationService[]>(this.url).pipe(map(fuels => fuels.filter(fuel => fuel.available)))
   }
+
+  updaterServicesAvailability(id: number, available: boolean): Observable<StationService>{
+    return this.http.patch<StationService>(`${this.url}/${id}`, {available})
+  }
 }
