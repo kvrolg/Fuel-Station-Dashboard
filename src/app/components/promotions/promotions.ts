@@ -1,5 +1,5 @@
 import { AsyncPipe, DatePipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { MatButton, MatMiniFabButton } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
@@ -10,6 +10,7 @@ import { Promotion } from '../../models/promotion.model';
 import { PromotionService } from '../../promotion-service';
 import { DeletePromotionComponent } from './delete-promotion-component/delete-promotion-component';
 import { EditPromotionComponent } from './edit-promotion-component/edit-promotion-component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-promotions',
@@ -29,12 +30,13 @@ import { EditPromotionComponent } from './edit-promotion-component/edit-promotio
 export class Promotions {
   private promotionService = inject(PromotionService);
   private dialog = inject(MatDialog);
+  private destroyRef = inject(DestroyRef);
   keys: string[] = ['title', 'description', 'flag', 'range', 'badge', 'pointsReward', 'action'];
 
   protected openModal(): void {
     const openedDialog = this.dialog.open(EditPromotionComponent, { disableClose: true });
     openedDialog.componentInstance.mode = 'add';
-    openedDialog.afterClosed().subscribe((row: Promotion) => this.updateTable(row));
+    openedDialog.afterClosed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe((row: Promotion) => this.updateTable(row));
   }
 
   protected openEditModal(element: Promotion): void {
@@ -43,7 +45,7 @@ export class Promotions {
       data: element,
     });
     openedDialog.componentInstance.mode = 'edit';
-    openedDialog.afterClosed().subscribe((row: Promotion) => this.editRowInTable(row));
+    openedDialog.afterClosed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe((row: Promotion) => this.editRowInTable(row));
   }
 
   protected openDeleteModal(element: Promotion): void {
@@ -51,7 +53,7 @@ export class Promotions {
       disableClose: true,
       data: element,
     });
-    openedDialog.afterClosed().subscribe((row: Promotion) => this.deleteRowInTable(row));
+    openedDialog.afterClosed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe((row: Promotion) => this.deleteRowInTable(row));
   }
 
   editRowInTable(updatedRow: Promotion): void {

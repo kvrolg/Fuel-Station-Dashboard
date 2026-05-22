@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, Input, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -22,6 +22,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormMode } from '../../../models/form.model';
 import { Promotion } from '../../../models/promotion.model';
 import { PromotionService } from '../../../promotion-service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-edit-promotion-component',
@@ -46,6 +47,7 @@ export class EditPromotionComponent implements OnInit {
   private dialogRef = inject(MatDialogRef);
   private promotionService = inject(PromotionService);
   private datePipe = inject(DatePipe);
+  private destroyRef = inject(DestroyRef);
   private editedRow = inject(MAT_DIALOG_DATA);
 
   @Input() mode: FormMode = 'add';
@@ -115,13 +117,19 @@ export class EditPromotionComponent implements OnInit {
     };
 
     if (this.isEditMode) {
-      this.promotionService.updatePromotion(newPromotion.id, newPromotion).subscribe((update) => {
-        this.dialogRef?.close(update);
-      });
+      this.promotionService
+        .updatePromotion(newPromotion.id, newPromotion)
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe((update) => {
+          this.dialogRef?.close(update);
+        });
     } else {
-      this.promotionService.createPromotion(newPromotion).subscribe((update) => {
-        this.dialogRef?.close(update);
-      });
+      this.promotionService
+        .createPromotion(newPromotion)
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe((update) => {
+          this.dialogRef?.close(update);
+        });
     }
   }
 }
