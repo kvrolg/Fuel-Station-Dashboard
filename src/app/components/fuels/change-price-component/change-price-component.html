@@ -1,20 +1,21 @@
 <article>
   <h1>Change price</h1>
   <form [formGroup]="applyForm" (submit)="submitApplication()">
-    <mat-form-field>
+    <mat-form-field style="margin-bottom: 15px;">
       <mat-label>Choose a fuel</mat-label>
       <mat-select formControlName="choosenFuel">
         @for(index of arrayOfIndex; track index){
             <mat-option [value]="index + 1">{{ fuelsTable[index] }}</mat-option>
         }
       </mat-select>
+      <mat-error>Choose a fuel!</mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label for="priceOfFuel">Set a price:</mat-label>
       <input type="number" id="priceOfFuel" formControlName="priceOfFuel" matInput />
     </mat-form-field>
-    <button type="submit" matButton="filled">Apply changes</button>
+    <button type="submit" matButton="filled" [disabled]="!applyForm.valid">Apply changes</button>
   </form>
 
   <button (click)="closeModal()" matButton>Close</button>
