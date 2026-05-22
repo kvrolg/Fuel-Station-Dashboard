@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FuelService } from '../../../fuel-service';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormField, MatSelect, MatOption } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -34,8 +34,8 @@ export class ChangePriceComponent {
   }
 
   applyForm = new FormGroup({
-    choosenFuel: new FormControl(''),
-    priceOfFuel: new FormControl(''),
+    choosenFuel: new FormControl('', Validators.required),
+    priceOfFuel: new FormControl('', [Validators.required, Validators.min(0.01)]),
   });
 
   submitApplication(): void {
@@ -48,12 +48,6 @@ export class ChangePriceComponent {
         .subscribe((updatedFuel) => {
           this.dialogRef?.close(updatedFuel);
         });
-    } else if (!this.applyForm.value.choosenFuel) {
-      alert('Choose a fuel');
-    } else if (!this.applyForm.value.priceOfFuel) {
-      alert('Set a price');
-    } else {
-      alert('Choose a fuel and set a price');
     }
   }
 }
