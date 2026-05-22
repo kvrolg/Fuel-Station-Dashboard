@@ -1,6 +1,13 @@
 # FuelStationDashboard
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.8.
+Application for a fuel station employee. You can:
+
+- view fuel list
+- set current prices
+- add and edit promotions
+- set services availability
+- filter data
+- and many more
 
 ## Run Locally
 
