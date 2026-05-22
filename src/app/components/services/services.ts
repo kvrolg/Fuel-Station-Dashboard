@@ -33,7 +33,6 @@ export class Services {
   }
 
   toggleChangeAvailability(id: number, event: MatSlideToggleChange): void{
-    console.log(id)
     this.StationServices.updaterServicesAvailability(+id, event.checked).subscribe((updatedService: StationService) => this.updateServiceCard(updatedService));
   }
 
