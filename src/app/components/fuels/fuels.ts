@@ -40,10 +40,11 @@ interface FilterState {
     FormsModule,
     MatSortModule,
     MatProgressSpinner,
+    NgStyle,
     NgClass,
     MatIcon,
-    NgIf,
-  ],
+    NgIf
+],
   templateUrl: './fuels.html',
   styleUrl: './fuels.scss',
 })
