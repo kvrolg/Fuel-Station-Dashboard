@@ -1,7 +1,7 @@
 <article>
   <h1>Change price</h1>
   <form [formGroup]="applyForm" (submit)="submitApplication()">
-    <mat-form-field style="margin-bottom: 15px;">
+    <mat-form-field class="choose-fuel-field">
       <mat-label>Choose a fuel</mat-label>
       <mat-select formControlName="choosenFuel">
         @for(index of arrayOfIndex; track index){
