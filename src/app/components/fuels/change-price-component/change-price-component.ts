@@ -7,7 +7,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-change-price-component',
@@ -27,7 +26,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ChangePriceComponent {
   private dialogRef = inject(MatDialogRef, { optional: true });
   private fuelsList = inject(FuelService);
-  private snackBar = inject(MatSnackBar);
   arrayOfIndex = [0, 1, 2, 3, 4];
 
   fuelsTable: Array<string> = ['PB95', 'PB98', 'ON', 'ON Premium', 'LPG'];
@@ -50,8 +48,6 @@ export class ChangePriceComponent {
         .subscribe((updatedFuel) => {
           this.dialogRef?.close(updatedFuel);
         });
-        
-        this.snackBar.open('Changed price successfully!', 'Dismiss', {duration:3000, panelClass: ['snackbar-success'], horizontalPosition: 'end'});
     } else if (!this.applyForm.value.choosenFuel) {
       alert('Choose a fuel');
     } else if (!this.applyForm.value.priceOfFuel) {

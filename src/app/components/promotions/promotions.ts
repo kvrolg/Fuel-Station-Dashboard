@@ -4,13 +4,12 @@ import { MatButton, MatMiniFabButton } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { Observable, tap } from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
 import { Promotion } from '../../models/promotion.model';
 import { PromotionService } from '../../promotion-service';
-import { AddNewPromotionComponent } from './add-new-promotion-component/add-new-promotion-component';
 import { EditPromotionComponent } from './edit-promotion-component/edit-promotion-component';
 import { DeletePromotionComponent } from './delete-promotion-component/delete-promotion-component';
-import { MatProgressSpinner } from "@angular/material/progress-spinner";
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-promotions',
@@ -22,8 +21,8 @@ import { MatProgressSpinner } from "@angular/material/progress-spinner";
     MatIconModule,
     MatIcon,
     MatMiniFabButton,
-    MatProgressSpinner
-],
+    MatProgressSpinner,
+  ],
   templateUrl: './promotions.html',
   styleUrl: './promotions.scss',
 })
@@ -33,7 +32,8 @@ export class Promotions {
   keys: string[] = ['title', 'description', 'flag', 'range', 'badge', 'pointsReward', 'action'];
 
   protected openModal(): void {
-    const openedDialog = this.dialog.open(AddNewPromotionComponent, { disableClose: true });
+    const openedDialog = this.dialog.open(EditPromotionComponent, { disableClose: true });
+    openedDialog.componentInstance.mode = 'add';
     openedDialog.afterClosed().subscribe((row: Promotion) => this.updateTable(row));
   }
 
@@ -42,6 +42,7 @@ export class Promotions {
       disableClose: true,
       data: element,
     });
+    openedDialog.componentInstance.mode = 'edit';
     openedDialog.afterClosed().subscribe((row: Promotion) => this.editRowInTable(row));
   }
 
@@ -84,7 +85,7 @@ export class Promotions {
   promotions$: Observable<Promotion[]> = this.promotionService.getPromotions().pipe(
     tap((items) => {
       this.dataSource.data = items;
-    }),
+    })
   );
 
   dataSource = new MatTableDataSource<Promotion>();
