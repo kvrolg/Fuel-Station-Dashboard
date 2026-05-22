@@ -1,23 +1,24 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { AsyncPipe, NgClass, NgIf, NgStyle } from '@angular/common';
 import { AfterViewInit, Component, inject, ViewChild } from '@angular/core';
-import { FuelService } from '../../fuel-service';
-import { FuelModel } from '../../models/fuel.model';
-import { AsyncPipe } from '@angular/common';
-import { Observable, tap } from 'rxjs';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import {
-  MatSlideToggleModule,
   MatSlideToggle,
   MatSlideToggleChange,
+  MatSlideToggleModule,
 } from '@angular/material/slide-toggle';
-import { FormsModule } from '@angular/forms';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { Observable, tap } from 'rxjs';
+import { FuelService } from '../../fuel-service';
+import { FuelModel } from '../../models/fuel.model';
 import { ChangePriceComponent } from './change-price-component/change-price-component';
-import { MatDialog } from '@angular/material/dialog';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { MatProgressSpinner } from "@angular/material/progress-spinner";
+import { MatIcon } from "@angular/material/icon";
 
 interface FilterState {
   name: string;
@@ -37,25 +38,28 @@ interface FilterState {
     MatSlideToggleModule,
     FormsModule,
     MatSortModule,
-    MatProgressSpinner
+    MatProgressSpinner,
+    NgStyle,
+    NgClass,
+    MatIcon,
+    NgIf
 ],
   templateUrl: './fuels.html',
   styleUrl: './fuels.scss',
 })
-export class Fuels implements AfterViewInit{
+export class Fuels implements AfterViewInit {
   keys: string[] = ['name', 'price', 'category', 'available', 'stockLevel', 'premium'];
   dataSource = new MatTableDataSource<FuelModel>();
   private dialog = inject(MatDialog);
-  private _liveAnnouncer = inject(LiveAnnouncer)
+  private _liveAnnouncer = inject(LiveAnnouncer);
   private fuelsList = inject(FuelService);
   defaultSort: MatSort | undefined;
   filterState: FilterState = { name: '', available: null, premium: null };
-  
+
   @ViewChild(MatSort) set sort(value: MatSort) {
     this.dataSource.sort = value;
   }
   protected openModal(): void {
-    
     const openedDialog = this.dialog.open(ChangePriceComponent, { disableClose: true });
     openedDialog.afterClosed().subscribe((row: FuelModel) => {
       this.updateFuelRow(row);
@@ -70,7 +74,6 @@ export class Fuels implements AfterViewInit{
       this.dataSource.data = [...updatedTable];
     }
   }
-
 
   fuels$: Observable<FuelModel[]> = this.fuelsList.getFuels().pipe(
     tap((items) => {
@@ -116,15 +119,23 @@ export class Fuels implements AfterViewInit{
       });
   }
 
-  ngAfterViewInit(): void{
-    this.dataSource.sort = this.sort
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
   }
 
-  announceSortChange(sortState: Sort): void{
-    if(sortState.direction){
+  announceSortChange(sortState: Sort): void {
+    if (sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else{
+    } else {
       this._liveAnnouncer.announce(`Sorting cleared`);
     }
+  }
+
+  get cheapestPrice(): number{
+    const newTable = this.dataSource.data;
+    if(!newTable){
+      return 0;
     }
+    return Math.min(...newTable.map(fuel => fuel.price))
+  }
 }
