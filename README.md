@@ -14,7 +14,7 @@ Application for a fuel station employee. You can:
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/kvrolg/Fuel-Station-Dashboard.git
 ```
 
 Go to the project directory
