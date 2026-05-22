@@ -45,6 +45,39 @@ tr:nth-child(even) {
       max-width: 200px !important;
     }
   }
+  .isAvailable{
+     @include mat.slide-toggle-overrides((
+    selected-icon-color: rgb(45, 177, 78),
+    label-text-weight: 500
+  ));
+  }
+  .isNotAvailable{
+    @include mat.slide-toggle-overrides((
+    label-text-size: 12px
+  ));
+
+  }
+
+  .premium-icon{
+    color: rgb(194, 182, 22);
+    vertical-align: bottom;
+  }
+  .best-price{
+    vertical-align: bottom;
+    color: rgb(0, 255, 85);
+    font-size: 15px;
+    height: 18px;
+    width: 15px;
+  }
+  .best-price-div{
+    display: inline-block;
+    background-color: rgba(163, 255, 194, 0.541);
+    border-radius: 3px;
+    border: 1px solid rgb(95, 194, 128);
+    padding: 2px 8px 2px 2px;
+    color: rgb(35, 70, 46);
+    margin-left: 15px;
+  }
 }
 
 .filtering {

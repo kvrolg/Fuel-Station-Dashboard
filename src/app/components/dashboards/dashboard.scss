@@ -22,6 +22,7 @@
     font-size: 50px;
     height: auto;
     width: auto;
+    vertical-align: bottom;
   }
   .main-card {
     @include mat.card-overrides(());

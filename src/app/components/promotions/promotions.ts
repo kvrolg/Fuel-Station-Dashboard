@@ -3,13 +3,13 @@ import { Component, inject } from '@angular/core';
 import { MatButton, MatMiniFabButton } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { catchError, Observable, of, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Promotion } from '../../models/promotion.model';
 import { PromotionService } from '../../promotion-service';
-import { EditPromotionComponent } from './edit-promotion-component/edit-promotion-component';
 import { DeletePromotionComponent } from './delete-promotion-component/delete-promotion-component';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { EditPromotionComponent } from './edit-promotion-component/edit-promotion-component';
 
 @Component({
   selector: 'app-promotions',
@@ -85,7 +85,7 @@ export class Promotions {
   promotions$: Observable<Promotion[]> = this.promotionService.getPromotions().pipe(
     tap((items) => {
       this.dataSource.data = items;
-    })
+    }),
   );
 
   dataSource = new MatTableDataSource<Promotion>();
