@@ -40,7 +40,6 @@ interface FilterState {
     FormsModule,
     MatSortModule,
     MatProgressSpinner,
-    NgStyle,
     NgClass,
     MatIcon,
     NgIf
